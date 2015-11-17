@@ -12,7 +12,7 @@
  */
 
 get_header(); ?>
-
+<!-- <?php echo basename( __FILE__ ); ?> -->
 	<section id="primary" class="site-content">
 		<div id="content" role="main">
 

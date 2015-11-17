@@ -1,16 +1,15 @@
 <?php
 /**
- * Template Name: Books2
+ * Template Name: BooksRecommedation
  */
  
 get_header(); ?>
 
 <div class="entry-content">
-  <h1>All Recommended Books</h1>
   <?php
-    $loop = new WP_Query( array( 'post_type' => 'rex' ) );
+    $loop = new WP_Query( array( 'post_type' => 'class-rex' ) );
     while ( $loop->have_posts() ) : 
-      $loop->the_post();
+      $loop->create_custom_post();
 
       $title = esc_html( get_post_meta( get_the_ID(), 'book_title', true ) );
       $author = esc_html( get_post_meta( get_the_ID(), 'book_author', true ) );
@@ -32,7 +31,7 @@ get_header(); ?>
     <p class = "description"><strong>Description:</strong> <?php echo $description;?></p>
     <a class = "gb_more" href="<?php echo $url; ?>" target="_blank">More...</a>
     <p class = "catergory_tags"><strong>Tags:</strong> <?php the_terms( $post->ID, 'category_tags');?></p>
-    <p class = "age_group_tags"><strong>Level:</strong> <?php the_terms( $post->ID, 'age_group_tags');?></p>
+    <p class = "age_group_tags"><strong>Student:</strong> <?php the_terms( $post->ID, 'age_group_tags');?></p>
     
   </div>
 
