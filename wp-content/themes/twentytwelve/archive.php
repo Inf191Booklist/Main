@@ -23,7 +23,9 @@ get_header(); ?>
 	<?php echo blah blah blah blah blah ?>
 		<div id="content" role="main">
 
-		<?php if ( have_posts() ) : ?>
+		<?php 		
+		do_action('show_beautiful_filters');
+		if ( have_posts() ) : ?>
 			<header class="archive-header">
 				<h1 class="archive-title"><?php
 					if ( is_day() ) :

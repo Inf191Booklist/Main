@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name.
+ * Plugin Name: Class Rex
  *
  * @package   Rex
  * @author    Your Name <email@example.com>
@@ -75,7 +75,10 @@ class Rex {
 		 * Refer To http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 		 */
 		add_action( 'init', array( $this, 'create_custom_post' ) );
+		
 
+		
+		
 		// Custom taxonomies won't be necessary until we make this custom post completely generic
 		// and start allowing users to define their own categories
 		add_action( 'init', array( $this, 'create_custom_taxonomies' ) );
@@ -363,6 +366,124 @@ class Rex {
 		foreach ( $taxonomies as $key => $taxonomy ) {
 			register_taxonomy( $key, $this->plugin_slug, $taxonomy );
 			register_taxonomy_for_object_type( $key, $this->plugin_slug );
+		}
+	}
+
+	
+
+	public function display_select_book_meta_box( $post ) {
+		// Include nonce for security.
+		wp_nonce_field( $this->plugin_slug . '_meta_box_select_book', $this->plugin_slug . '_meta_box_select_book_nonce' );
+
+		include_once( 'views/meta-boxes/select-book-meta-box.php' );
+	}
+
+	public function display_add_blurb_meta_box( $post ) {
+		// Include nonce for security.
+		wp_nonce_field( $this->plugin_slug . '_meta_box_add_blurb', $this->plugin_slug . '_meta_box_add_blurb_nonce' );
+
+		include_once( 'views/meta-boxes/add-blurb-meta-box.php' );
+	}
+
+	/**
+	 * Add settings action link to the plugins page.
+	 *
+	 * @since    1.0.0
+	 */
+	public function add_action_links( $links ) {
+
+		return array_merge(
+			array(
+				'settings' => '<a href="' . admin_url( 'options-general.php?page=' . $this->plugin_slug ) . '">' . __( 'Settings', $this->plugin_slug ) . '</a>'
+			),
+			$links
+		);
+
+	}
+
+	/**
+	 * @since    1.0.0
+	 */
+	public function add_meta_boxes() {
+
+		// Add user-defined meta boxes, if any
+
+		// Add default meta boxes
+		add_meta_box(
+			'select-book-meta-box',
+			__( 'Book Information' ),
+			array( $this, 'display_select_book_meta_box' ),
+			$this->plugin_slug,
+			'normal'
+		);
+
+		add_meta_box(
+			'add-blurb-meta-box',
+			__( 'Your Comments' ),
+			array( $this, 'display_add_blurb_meta_box' ),
+			$this->plugin_slug,
+			'advanced'
+		);
+	}
+
+	public function save_meta_boxes( $post_ID ) {
+
+		// Make sure user saved from a page with this custom post's meta boxes.
+		if ( ! isset( $_POST[ $this->plugin_slug . '_meta_box_select_book_nonce' ] ) ||
+			! isset( $_POST[ $this->plugin_slug . '_meta_box_add_blurb_nonce' ] ) ) {
+			return;
+		}
+
+		// Make sure this is not an autosave.
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		// Make sure user has appropriate permissions.
+		if ( ! current_user_can( 'edit_post', $post_ID ) ) {
+			return;
+		}
+
+		if ( isset( $_POST['book-select-title'] ) ) {
+			update_post_meta( $post_ID, 'book_title', $_POST['book-select-title'] );
+
+			// Avoid infinite loop by unhooking function temporarily.
+			remove_action( 'save_post_' . $this->plugin_slug, array( $this, 'save_meta_boxes' ) );
+
+			// Post title should also be updated with new title value.
+			$updated_post = array(
+				'ID'					=> $post_ID,
+				'post_title' 	=> $_POST['book-select-title'],
+			);
+			wp_update_post( $updated_post );
+
+			// Re-hook the function.
+			add_action( 'save_post_' . $this->plugin_slug, array( $this, 'save_meta_boxes' ) );
+
+		}
+
+		if ( isset( $_POST['book-select-isbn'] ) ) {
+			update_post_meta( $post_ID, 'book_isbn', $_POST['book-select-isbn'] );
+		}
+
+		if ( isset( $_POST['book-select-author'] ) ) {
+			update_post_meta( $post_ID, 'book_author', $_POST['book-select-author'] );
+		}
+
+		if ( isset( $_POST['book-select-description'] ) ) {
+			update_post_meta( $post_ID, 'book_description', $_POST['book-select-description'] );
+		}
+
+		if ( isset( $_POST['book-select-url'] ) ) {
+			update_post_meta( $post_ID, 'book_url', $_POST['book-select-url'] );
+		}
+
+		if ( isset( $_POST['book-select-thumbnail'] ) ) {
+			update_post_meta( $post_ID, 'book_thumbnail', $_POST['book-select-thumbnail'] );
+		}
+
+		if ( isset( $_POST['book-blurb-text'] ) ) {
+			update_post_meta( $post_ID, 'book_blurb', $_POST['book-blurb-text'] );
 		}
 	}
 

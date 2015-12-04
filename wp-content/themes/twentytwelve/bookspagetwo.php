@@ -2,11 +2,15 @@
 /**
  * Template Name: Books2
  */
+
+/* Edited by Bookworms
+*/
  
 get_header(); ?>
-
+<link href="css/rexcss.css" rel="stylesheet">
 <div class="entry-content">
-  <h1>All Recommended Books</h1>
+  <h1>Welcome to Booklist!</h1>
+  <h2>All Recommended Books </h2>
   <?php
     $loop = new WP_Query( array( 'post_type' => 'rex' ) );
     while ( $loop->have_posts() ) : 
@@ -24,15 +28,15 @@ get_header(); ?>
 
   <hr />
   <div class="book_listing group">
-      <img src="<?php echo $thumbnail; ?>" alt="<?php echo $title; ?>" class="alignnone size-full wp-image-619">
-    <p class="book_title" style="font-family: District-Medium, Helvetica; font-weight: normal; font-style: normal; font-size: 20px;"><?php echo $title; ?></p>
+      <img src="<?php echo $thumbnail; ?>" alt="<?php echo $title; ?>">
+    <p class="book_title"><?php echo $title; ?></p>
     <p class="book_aut"><?php echo $author; ?></p>
     <p class="book_recommend">Recommended by <a href="<?php echo $recommender_url; ?>"><?php the_author_meta( 'first_name', $author_id ); echo ' '; the_author_meta( 'last_name', $author_id ); ?></a></p>
-    <p class="book_paragraph" style="font-family: District-BoldItalic, Helvetica; font-weight: normal; font-style: normal;"><?php echo $blurb; ?></p>
-    <p class = "description"><strong>Description:</strong> <?php echo $description;?></p>
+    <p class="book_paragraph"><?php echo $blurb; ?></p>
+    <p class = "description">Description: <?php echo $description;?></p>
     <a class = "gb_more" href="<?php echo $url; ?>" target="_blank">More...</a>
-    <p class = "catergory_tags"><strong>Tags:</strong> <?php the_terms( $post->ID, 'category_tags');?></p>
-    <p class = "age_group_tags"><strong>Level:</strong> <?php the_terms( $post->ID, 'age_group_tags');?></p>
+    <p class = "catergory_tags">Tags: <?php the_terms( $post->ID, 'category_tags');?></p>
+    <p class = "age_group_tags">Level: <?php the_terms( $post->ID, 'age_group_tags');?></p>
     
   </div>
 

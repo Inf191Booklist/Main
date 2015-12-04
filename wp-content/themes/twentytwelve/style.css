@@ -2288,9 +2288,9 @@ footer[role="contentinfo"] a:hover {
 
 .entry-header {
 
-	margin-bottom: 24px;
+	//margin-bottom: 24px;
 
-	margin-bottom: 1.714285714rem;
+	//margin-bottom: 1.714285714rem;
 
 }
 
@@ -5675,4 +5675,27 @@ img#wpstats {
  	padding: 5px 0px;
 	float:right;
 	width: 80%;
+}
+
+.hpbuttcontainer {
+	padding: 10px 0px;
+
+}
+
+.hpbutton {
+	-moz-appearance: button;
+	-ms-appearance: button;
+	-o-appearance: button;
+        -webkit-appearance: button;
+        appearance: button;
+        text-decoration: none;
+        color: #000;
+        padding: 0.2em 0.4em;
+}
+
+.bannerpic {
+	max-width: 100%;
+    	height: auto;
+	
+
 }

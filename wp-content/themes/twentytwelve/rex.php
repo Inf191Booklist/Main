@@ -54,13 +54,6 @@ require_once( plugin_dir_path( __FILE__ ) . 'public/class-rex.php' );
 register_activation_hook( __FILE__, array( 'Rex', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'Rex', 'deactivate' ) );
 
-/*
- * @TODO:
- *
- * - replace Plugin_Name with the name of the class defined in
- *   `class-plugin-name.php`
- */
-add_action( 'plugins_loaded', array( 'Rex', 'get_instance' ) );
 
 /*----------------------------------------------------------------------------*
  * Dashboard and Administrative Functionality
@@ -85,9 +78,10 @@ if ( is_admin() ) {
 
 add_filter( 'template_include', 'include_template_function', 1 );
 function include_template_function( $template_path ) {
+    /*MAY NEED TO CHANGE IF AUTHOR PAGE IS NOT WORKING CORRECTLY*/
     if ( get_post_type() == 'rex' ) {
-		if( is_author()){
-	if ( $theme_file = locate_template( array ( 'author-rexes.php' ) ) ) {
+	if( is_author()){
+	      if ( $theme_file = locate_template( array ( 'author-rexes.php' ) ) ) {
                 $template_path = $theme_file;
             } else { $template_path = plugin_dir_path( __FILE__ ) . '/author-rexes.php';
  
@@ -102,5 +96,3 @@ function include_template_function( $template_path ) {
     }
     return $template_path;
 }
-
-

@@ -27,7 +27,7 @@
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
-	die;
+    die;
 }
 
 /*----------------------------------------------------------------------------*
@@ -78,16 +78,16 @@ add_action( 'plugins_loaded', array( 'Rex', 'get_instance' ) );
  */
 if ( is_admin() ) {
 
-	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-rex-admin.php' );
-	add_action( 'plugins_loaded', array( 'Rex_Admin', 'get_instance' ) );
+    require_once( plugin_dir_path( __FILE__ ) . 'admin/class-rex-admin.php' );
+    add_action( 'plugins_loaded', array( 'Rex_Admin', 'get_instance' ) );
 
 }
 
 add_filter( 'template_include', 'include_template_function', 1 );
 function include_template_function( $template_path ) {
     if ( get_post_type() == 'rex' ) {
-		if( is_author()){
-	if ( $theme_file = locate_template( array ( 'author-rexes.php' ) ) ) {
+        if( is_author()){
+    if ( $theme_file = locate_template( array ( 'author-rexes.php' ) ) ) {
                 $template_path = $theme_file;
             } else { $template_path = plugin_dir_path( __FILE__ ) . '/author-rexes.php';
  
@@ -99,7 +99,7 @@ function include_template_function( $template_path ) {
  
             }
         }
-	if ( is_single() ) {
+    if ( is_single() ) {
             // checks if the file exists in the theme first,
             // otherwise serve the file from the plugin
             if ( $theme_file = locate_template( array ( 'single-rexes.php' ) ) ) {
