@@ -24,7 +24,7 @@
       <img src="<?php echo $thumbnail; ?>" alt="<?php echo $title; ?>" class="alignnone size-full wp-image-619">
     <p class="book_title" style="font-family: District-Medium, Helvetica; font-weight: normal; font-style: normal; font-size: 20px;"><?php echo $title; ?></p>
     <p class="book_aut"><?php echo $author; ?></p>
-    <p class="book_recommend">Recommended by <a href="<?php echo $recommender_url; ?>"><?php the_author_meta( 'first_name', $author_id ); echo ' '; the_author_meta( 'last_name', $author_id ); ?></a></p>
+    <p class="book_recommend">Recommended by <a href ="https://booklist.ics.uci.edu/?page_id=188">David G. Kay</a></p>
     <p class="book_paragraph" style="font-family: District-BoldItalic, Helvetica; font-weight: normal; font-style: normal;"><?php echo $blurb; ?></p>
     <p class = "description"><strong>Description:</strong> <?php echo $description;?></p>
     <a class = "gb_more" href="<?php echo $url; ?>" target="_blank">More...</a>

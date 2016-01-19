@@ -31,7 +31,9 @@ get_header(); ?>
       <img src="<?php echo $thumbnail; ?>" alt="<?php echo $title; ?>">
     <p class="book_title"><?php echo $title; ?></p>
     <p class="book_aut"><?php echo $author; ?></p>
-    <p class="book_recommend">Recommended by <a href="<?php echo $recommender_url; ?>"><?php the_author_meta( 'first_name', $author_id ); echo ' '; the_author_meta( 'last_name', $author_id ); ?></a></p>
+    <p class="book_recommend">Recommended by <a href ="https://booklist.ics.uci.edu/?page_id=188">David G. Kay</a></p>
+
+<!-- <a href="<?php echo $recommender_url; ?>"><?php the_author_meta( 'first_name', $author_id ); echo ' '; the_author_meta( 'last_name', $author_id ); ?></a></p> -->
     <p class="book_paragraph"><?php echo $blurb; ?></p>
     <p class = "description">Description: <?php echo $description;?></p>
     <a class = "gb_more" href="<?php echo $url; ?>" target="_blank">More...</a>

@@ -5696,6 +5696,42 @@ img#wpstats {
 .bannerpic {
 	max-width: 100%;
     	height: auto;
-	
+}
 
+
+h2.profposition {
+	margin: 0px;
+	
+}
+
+.profpic{
+	-moz-box-shadow:    3px 3px 5px 4px #ccc;
+  	-webkit-box-shadow: 3px 3px 5px 4px #ccc;
+  	box-shadow:         3px 3px 5px 4px #ccc;
+	display: inline-block;
+	float: right;
+	margin-right: 7px;
+	height: 120px;
+	width: 100px;
+}
+
+
+.profcontent{
+	float: left;
+}
+
+.profcontent :first-child {
+	margin-top: 0px;
+	
+}
+
+.profsubtitle{
+	display: inline-block;
+	font-family: District-Medium, Helvetica;
+        font-weight: bold;
+        font-style: italic;
+}
+
+.main-navigation li a {
+	font-family: District-Book, Helvetica;
 }

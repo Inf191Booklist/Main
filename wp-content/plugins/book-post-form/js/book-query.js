@@ -50,6 +50,7 @@ jQuery(document).ready(function($) {
     $editLink
       .addClass('edit-link')
       .appendTo($label.find('p'));
+
   }
 
   // Event handler for updating thumbnail image to match thumbnail field.
@@ -58,6 +59,7 @@ jQuery(document).ready(function($) {
   });
 
   $("#book-search-text").select2({
+      placeholder: "Search for a book",
       minimumInputLength: 3,
       ajax: {
           url: "https://www.googleapis.com/books/v1/volumes",

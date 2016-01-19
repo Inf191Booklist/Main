@@ -29,7 +29,7 @@ class UCI_WebAuth_Adapter {
     }
 
     // Deny access if user is not of a particular affiliation.
-    if ( strpos( $auth->uci_affiliations, 'faculty' ) === false ) {
+    if ( strpos( $auth->uci_affiliations, 'student' ) === false ) {
 
       if ( wp_get_referer() ) {
         wp_safe_redirect( wp_get_referer() );

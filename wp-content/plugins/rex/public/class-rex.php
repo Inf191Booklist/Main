@@ -85,6 +85,76 @@ class Rex {
 
 	}
 
+	function get_public_page_title()
+	{
+	    echo"
+	    <!-- Actual Book Post Form -->
+	    <div class='book-wrap book-wrap-half'>
+	        <div id='book-search-text' class='book-wrap book-wrap-left book-search'></div>
+
+	        <div class='under-selector'>
+	            <label id='book-select-thumbnail-label' for='book-select-thumbnail'>
+	                <p><strong>Thumbnail</strong></p>
+	                <input class='large-text' type='text' name='book-select-thumbnail' id='book-select-thumbnail' value='<?php echo $thumbnail; ?>' hidden />
+	            </label>
+	            <div class='book-wrap'>
+	                <img id='book-select-thumbnail-img' src='<?php echo $thumbnail; ?>' />
+	            </div>
+	            
+	            <div class='book-tags'>
+	                <label id='book-select-tag-label' for='book-select-tags'>
+	                    <p><strong>Tags</strong></p>
+	                    <input type='checkbox' id='book-select-tag' name='book-select-tag' value='ui'/>UI<br>
+	                    <input type='checkbox' id='book-select-tag' name='book-select-tag' value='ux'/>UX<br>
+	                    <input type='checkbox' id='book-select-tag' name='book-select-tag' value='hci'/>HCI<br>
+	                </label>
+
+	                <label id='book-select-tag-label' for='book-select-tags'>
+	                    <p><strong>Audience</strong></p>
+	                    <input type='checkbox' id='book-select-audience' name='book-select-audience' value='ugrad'/>Undergraduate<br>
+	                    <input type='checkbox' id='book-select-audience' name='book-select-audience' value='grad'/>Graduate<br>
+	                    <input type='checkbox' id='book-select-audience' name='book-select-audience' value='pgrad'/>Post-Gradaute<br>
+	                </label>
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class='book-wrap book-wrap-half'>
+	        <label id='book-select-title-label' for='book-select-title'>
+	            <p><strong>Title</strong></p>
+	            <input class='large-text' id='book-select-title' type='text' name='book-select-title' value='<?php echo $title; ?>' readonly />
+	        </label>
+
+	        <label id='book-select-author-label' for='book-select-author'>
+	            <p><strong>Author</strong></p>
+	            <input class='large-text' id='book-select-author' type='text' name='book-select-author' value='<?php echo $author; ?>' readonly />
+	        </label>
+
+	        <label id='book-select-url-label' for='book-select-url'>
+	            <p><strong>Book URL</strong></p>
+	            <input class='large-text' id='book-select-url' type='text' name='book-select-url' value='<?php echo $url; ?>' readonly />
+	        </label>
+
+	        <label id='book-select-isbn-label' for='book-select-isbn'>
+	            <p><strong>ISBN</strong></p>
+	            <input class='large-text' id='book-select-isbn' type='text' name='book-select-isbn' value='<?php echo $isbn; ?>' readonly />
+	        </label>
+
+	        <label id='book-select-description-label' for='book-select-description'>
+	            <p><strong>Official Description</strong></p>
+	            <textarea class='large-text' rows='6' id='book-select-description' name='book-select-description' readonly><?php echo $description; ?></textarea>
+	        </label>
+
+	        <div class='post-button' id='submit-buttom'>
+	            <button id='submit' text='Submit'>Submit</button>
+	        </div>
+	    </div>
+
+	    <!-- Used for clearing floats -->
+	    <div style='clear: both;'></div>
+	    ";
+	}
+
 	/**
 	 * Return the plugin slug.
 	 *
@@ -270,7 +340,9 @@ class Rex {
 	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/public.css', __FILE__ ), array(), self::VERSION );
-	}
+		/*wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/select2.css', __FILE__ ), array(), self::VERSION );
+		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/book-select.css', __FILE__ ), array(), self::VERSION );
+	*/}
 
 	/**
 	 * Register and enqueues public-facing JavaScript files.
@@ -278,7 +350,11 @@ class Rex {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( 'jquery' ), self::VERSION );
+		/*wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/jquery.min.js', __FILE__ ), array( 'jquery' ), self::VERSION );
+		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/select2.min.js', __FILE__ ), array( 'jquery' ), self::VERSION );
+		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/book-query.js', __FILE__ ), array( 'jquery' ), self::VERSION );
+		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/admin-meta-boxes.js', __FILE__ ), array( 'jquery' ), self::VERSION );
+		*/wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( 'jquery' ), self::VERSION );
 	}
 
 	/**
@@ -487,4 +563,12 @@ class Rex {
 		}
 	}
 
+	/*function prf_shortcode() {
+		ob_start();
+		get_public_page_title();
+		return ob_get_clean();
+	}
+
+	add_shortcode( 'rex-book-post-form', 'prf_shortcode' );
+*/
 }
